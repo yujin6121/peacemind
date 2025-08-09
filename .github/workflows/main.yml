@@ -42,7 +42,7 @@ jobs:
         npm run build
       env:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        REACT_APP_USE_BACKEND: false
+        REACT_APP_USE_BACKEND: true
         CI: false
 
     - name: Upload artifact
