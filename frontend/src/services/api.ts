@@ -4,17 +4,18 @@ import { CounselingRequest, CounselingResponse, Emotion, CrisisResource } from '
 // 환경에 따른 API URL 설정
 const API_BASE_URL = process.env.REACT_APP_API_URL || 
   (process.env.NODE_ENV === 'production' 
-    ? 'https://s3.yujin6121.xyz'  // 실제 백엔드 서버 URL
-    : 'http://localhost:8000');
+    ? 'https://s3.yujin6121.xyz'  // 실제 백엔드 서버 URL (포트 4000이면 :4000 추가 필요)
+    : 'http://localhost:4000');  // 로컬에서도 4000 포트 사용
 
 // 백엔드 사용 가능 여부 확인
-const USE_BACKEND = process.env.REACT_APP_USE_BACKEND !== 'false';
+const USE_BACKEND = process.env.REACT_APP_USE_BACKEND === 'true';  // 명시적으로 true일 때만 백엔드 사용
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000,  // 10초 타임아웃 추가
 });
 
 // 모킹 응답 함수
