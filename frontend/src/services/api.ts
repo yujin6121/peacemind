@@ -104,13 +104,17 @@ export const apiService = {
           return { response: `⚠️ 서버 오류가 발생했어요: ${message}\n\n급한 상황이시라면 아래 전화번호로 직접 상담받으실 수 있어요:\n\n- 청소년 전화 1388 (24시간 상담)\n- 정신건강위기 상담전화 1577-0199` };
         }
       } else if (error.request) {
-        // CORS 오류나 네트워크 오류시 모킹 응답 사용
-        console.log('네트워크 오류 감지, 모킹 응답으로 폴백합니다.');
-        return getMockResponse(message, emotion);
+        // CORS 오류나 네트워크 오류
+        console.log('CORS 또는 네트워크 오류:', error);
+        return { 
+          response: '⚠️ 서버 연결에 문제가 있어요.\n\nCORS 정책 또는 네트워크 문제로 백엔드 서버에 연결할 수 없습니다.\n\n잠시 후 다시 시도해주시거나, 급한 상황이시라면 아래 전화번호로 직접 상담받으실 수 있어요:\n\n- 청소년 전화 1388 (24시간 상담)\n- 정신건강위기 상담전화 1577-0199' 
+        };
       } else {
-        // 기타 오류시에도 모킹 응답 사용
-        console.log('기타 오류 감지, 모킹 응답으로 폴백합니다.');
-        return getMockResponse(message, emotion);
+        // 기타 오류
+        console.log('요청 설정 오류:', error);
+        return { 
+          response: '⚠️ 일시적인 오류가 발생했어요.\n\n잠시 후 다시 시도해주시거나, 급한 상황이시라면 아래 전화번호로 직접 상담받으실 수 있어요:\n\n- 청소년 전화 1388 (24시간 상담)\n- 정신건강위기 상담전화 1577-0199' 
+        };
       }
     }
   },
