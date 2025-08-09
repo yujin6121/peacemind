@@ -41,7 +41,7 @@ jobs:
         cd frontend
         npm run build
       env:
-        REACT_APP_API_URL: https://s3.yujin6121.xyz:4000
+        REACT_APP_API_URL: https://s3.yujin6121.xyz
         REACT_APP_USE_BACKEND: true
         CI: false
 
