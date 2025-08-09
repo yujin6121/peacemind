@@ -79,7 +79,7 @@ const FloatingButton = styled.button`
 
 function App() {
   const goToFAQ = () => {
-    window.location.href = '/faq';
+    window.location.hash = '/faq';
   };
 
   return (
@@ -94,6 +94,7 @@ function App() {
           <Route path="/crisis-resources" element={<CrisisResourcesScreen />} />
           <Route path="/sessions" element={<SessionsScreen />} />
           <Route path="/faq" element={<FAQScreen />} />
+          <Route path="*" element={<HomeScreen />} />
         </Routes>
 
         <FloatingMenu>
