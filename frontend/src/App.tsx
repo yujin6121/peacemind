@@ -45,7 +45,7 @@ const AppContainer = styled.div`
 
 const FloatingMenu = styled.div`
   position: fixed;
-  bottom: 20px;
+  bottom: 100px;
   right: 20px;
   z-index: 1000;
   display: flex;
