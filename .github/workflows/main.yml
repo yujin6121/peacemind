@@ -9,6 +9,13 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - name: Checkout
@@ -26,6 +33,9 @@ jobs:
         cd frontend
         npm ci
 
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
     - name: Build
       run: |
         cd frontend
@@ -34,9 +44,11 @@ jobs:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
         CI: false
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./frontend/build
+        path: ./frontend/build
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
