@@ -4,7 +4,7 @@ import { CounselingRequest, CounselingResponse, Emotion, CrisisResource } from '
 // 환경에 따른 API URL 설정
 const API_BASE_URL = process.env.REACT_APP_API_URL || 
   (process.env.NODE_ENV === 'production' 
-    ? 'https://your-homeserver-domain.com'  // 실제 홈서버 도메인으로 변경 필요
+    ? 'https://s3.yujin6121.xyz'  // 실제 홈서버 도메인으로 변경 필요
     : 'http://localhost:8000');
 
 const api = axios.create({
